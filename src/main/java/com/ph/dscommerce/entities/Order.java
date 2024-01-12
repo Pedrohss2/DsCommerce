@@ -3,6 +3,7 @@ package com.ph.dscommerce.entities;
 import com.ph.dscommerce.entities.enums.OrderStatus;
 import jakarta.persistence.*;
 
+import java.net.PasswordAuthentication;
 import java.time.Instant;
 
 @Entity
@@ -20,6 +21,9 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
+
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private Payment payment;
 
     public Order() {
 
@@ -62,4 +66,5 @@ public class Order {
     public void setClient(User client) {
         this.client = client;
     }
+    
 }

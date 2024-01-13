@@ -14,7 +14,7 @@ INSERT INTO tb_user(name, email, phone, birth_date, password) VALUES ('Pedro Hen
 INSERT INTO tb_user(name, email, phone, birth_date, password) VALUES ('Lorena', 'lorena@gmail.com', '439658458' ,'1999-03-09', '456482');
 
 INSERT INTO tb_order(moment, status, client_id) VALUES (TIMESTAMP WITHOUT TIME ZONE '2023-07-24T14:00:25Z', 1, 1);
-INSERT INTO tb_order(moment, status, client_id) VALUES (TIMESTAMP WITHOUT TIME ZONE '2024-01-10T17:28:25Z', 3, 1);
+INSERT INTO tb_order(moment, status, client_id) VALUES (TIMESTAMP WITHOUT TIME ZONE '2024-01-10T17:28:25Z', 1, 2);
 
 INSERT INTO tb_order_item(order_id, product_id, quantity, price) VALUES (1, 1, 3, 450.0);
 

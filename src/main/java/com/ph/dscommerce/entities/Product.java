@@ -1,9 +1,9 @@
 package com.ph.dscommerce.entities;
 
 import jakarta.persistence.*;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -23,6 +23,9 @@ public class Product {
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
+
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> orderItems = new HashSet<>();
 
     public Product() {
 
@@ -80,5 +83,14 @@ public class Product {
     public Set<Category> getCategories() {
         return categories;
     }
+
+    public Set<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public List<Order> getOrders() {
+        return orderItems.stream().map(x -> x.getOrder()).toList();
+    }
+
 
 }

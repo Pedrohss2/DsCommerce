@@ -22,7 +22,7 @@ public class ProductController {
     public String teste() {
         Optional<Product> valores = repository.findById(1L);
         Product product = valores.get();
-        return product.getName();
+        return product.getName() + "  " + product.getId();
     }
 
 

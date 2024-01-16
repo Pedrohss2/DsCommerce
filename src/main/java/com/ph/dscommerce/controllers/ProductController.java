@@ -1,7 +1,6 @@
 package com.ph.dscommerce.controllers;
 
 import com.ph.dscommerce.dto.ProductDTO;
-import com.ph.dscommerce.entities.Product;
 import com.ph.dscommerce.services.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
+
 
 @RestController
 @RequestMapping(value = "/products")
@@ -32,6 +31,7 @@ public class ProductController {
         return ResponseEntity.ok(dto);
     }
 
+    // Create
     @PostMapping
     public ResponseEntity<ProductDTO> insert(@RequestBody ProductDTO productDTO) {
         productDTO = service.insert(productDTO);
@@ -42,4 +42,13 @@ public class ProductController {
 
         return ResponseEntity.created(uri).body(productDTO);
     }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<ProductDTO> update(@PathVariable Long id, @RequestBody ProductDTO productDTO){
+        productDTO = service.update(id, productDTO);
+        return ResponseEntity.ok(productDTO);
+    }
+
+
+
 }

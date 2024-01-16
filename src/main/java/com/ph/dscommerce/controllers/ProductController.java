@@ -1,8 +1,10 @@
 package com.ph.dscommerce.controllers;
 
+import com.ph.dscommerce.dto.CustomError;
 import com.ph.dscommerce.dto.ProductDTO;
 import com.ph.dscommerce.services.ProductService;
 
+import com.ph.dscommerce.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.time.Instant;
 
 @RestController
 @RequestMapping(value = "/products")
@@ -20,7 +23,7 @@ public class ProductController {
     private ProductService service;
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<ProductDTO> findById(@PathVariable Long id){
+    public ResponseEntity<ProductDTO> findById(@PathVariable Long id)  {
         ProductDTO dto = service.findById(id);
         return ResponseEntity.ok(dto);
     }

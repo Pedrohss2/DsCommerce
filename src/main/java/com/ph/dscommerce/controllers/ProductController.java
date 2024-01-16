@@ -12,7 +12,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 
-
 @RestController
 @RequestMapping(value = "/products")
 public class ProductController {
@@ -25,13 +24,13 @@ public class ProductController {
         ProductDTO dto = service.findById(id);
         return ResponseEntity.ok(dto);
     }
+
     @GetMapping
     public ResponseEntity<Page<ProductDTO>> findAll(Pageable pageable) {
         Page<ProductDTO> dto = service.findAll(pageable);
         return ResponseEntity.ok(dto);
     }
 
-    // Create
     @PostMapping
     public ResponseEntity<ProductDTO> insert(@RequestBody ProductDTO productDTO) {
         productDTO = service.insert(productDTO);
@@ -49,6 +48,12 @@ public class ProductController {
         return ResponseEntity.ok(productDTO);
     }
 
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> update(@PathVariable Long id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 
 
 }

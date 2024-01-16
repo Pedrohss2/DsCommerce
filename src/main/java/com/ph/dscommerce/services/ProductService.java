@@ -3,11 +3,15 @@ package com.ph.dscommerce.services;
 import com.ph.dscommerce.dto.ProductDTO;
 import com.ph.dscommerce.entities.Product;
 import com.ph.dscommerce.repositories.ProductRepository;
+import com.ph.dscommerce.services.exceptions.DatabaseException;
 import com.ph.dscommerce.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 
@@ -44,19 +48,34 @@ public class ProductService {
          return new ProductDTO(product);
     }
 
-    @Transactional
+
     public ProductDTO update(Long id, ProductDTO productDTO) {
+        try {
+            Product product = repository.getReferenceById(id);
+            copyDtoToEntity(productDTO, product);
+            product = repository.save(product);
 
-        Product product = repository.getReferenceById(id);
-        copyDtoToEntity(productDTO, product);
-        product = repository.save(product);
+            return new ProductDTO(product);
+        }
+        catch (EntityNotFoundException error) {
+            throw new ResourceNotFoundException("Resource not found.");
+        }
 
-        return new ProductDTO(product);
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.SUPPORTS)
     public void delete(Long id) {
-        repository.deleteById(id);
+
+        if(!repository.existsById(id)) {
+            throw new ResourceNotFoundException("Resource not found.");
+        }
+
+        try {
+            repository.deleteById(id);
+        }
+        catch (DataIntegrityViolationException error) {
+            throw new DatabaseException("Falha de integridade referencial, deleção não pode ser feita");
+        }
     }
 
     private void copyDtoToEntity(ProductDTO productDTO, Product product) {

@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DscommerceApplication  implements CommandLineRunner {
+public class DscommerceApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DscommerceApplication.class, args);
@@ -14,5 +14,7 @@ public class DscommerceApplication  implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		System.out.println("App running on http://localhost:8080/");
+		System.out.println("Hello World my friend..");
 	}
+
 }

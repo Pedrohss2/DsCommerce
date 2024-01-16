@@ -6,6 +6,7 @@ import com.ph.dscommerce.repositories.ProductRepository;
 import com.ph.dscommerce.services.exceptions.DatabaseException;
 import com.ph.dscommerce.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -78,7 +79,7 @@ public class ProductService {
         }
     }
 
-    private void copyDtoToEntity(ProductDTO productDTO, Product product) {
+    private void copyDtoToEntity(@Valid ProductDTO productDTO, Product product) {
         product.setName(productDTO.getName());
         product.setDescription(productDTO.getDescription());
         product.setPrice(productDTO.getPrice());

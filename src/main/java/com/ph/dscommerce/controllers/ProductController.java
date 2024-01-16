@@ -5,6 +5,7 @@ import com.ph.dscommerce.dto.ProductDTO;
 import com.ph.dscommerce.services.ProductService;
 
 import com.ph.dscommerce.services.exceptions.ResourceNotFoundException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -35,7 +36,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductDTO> insert(@RequestBody ProductDTO productDTO) {
+    public ResponseEntity<ProductDTO> insert(@Valid @RequestBody ProductDTO productDTO) {
         productDTO = service.insert(productDTO);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
@@ -46,17 +47,15 @@ public class ProductController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<ProductDTO> update(@PathVariable Long id, @RequestBody ProductDTO productDTO){
+    public ResponseEntity<ProductDTO> update(@PathVariable Long id, @Valid @RequestBody ProductDTO productDTO){
         productDTO = service.update(id, productDTO);
         return ResponseEntity.ok(productDTO);
     }
-
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> update(@PathVariable Long id){
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
-
 
 }

@@ -1,11 +1,14 @@
 package com.ph.dscommerce.controllers.hendlers;
 
 import com.ph.dscommerce.dto.CustomError;
+import com.ph.dscommerce.dto.ValidationError;
 import com.ph.dscommerce.services.exceptions.DatabaseException;
 import com.ph.dscommerce.services.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
+import org.hibernate.cfg.ValidationSettings;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -32,7 +35,12 @@ public class  ControllerExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<CustomError> resourceNotFound(MethodArgumentNotValidException error, HttpServletRequest request) {
         HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
-        CustomError err = new CustomError(Instant.now(), status.value(), error.getMessage(), request.getRequestURI());
+        ValidationError err = new ValidationError(Instant.now(), status.value(), error.getMessage(), request.getRequestURI());
+
+
+        for(FieldError fieldError : error.getBindingResult().getFieldErrors()) {
+            err.addMessageOfErrorOnList(fieldError.getField(), fieldError.getDefaultMessage());
+        }
 
         return ResponseEntity.status(status).body(err);
     }

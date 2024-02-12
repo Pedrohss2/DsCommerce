@@ -17,9 +17,11 @@ public class ProductDTO {
     @Size(min = 3, max = 80, message = "Name field must have between 3 and 80 characters")
     @NotBlank(message = "Name field cannot be empty/null")
     private String name;
+
     @Size(min = 10, message = "Description needs at least 10 characters")
     @NotBlank(message = "Field 'description' cannot be null")
     private String description;
+
     @Positive(message = "price' field cannot be negative")
     private Double price;
     private String imgUrl;

@@ -1,12 +1,9 @@
 package com.ph.dscommerce.dto;
 
-import lombok.*;
-
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-@Getter
-@EqualsAndHashCode(of = "id")
+
 public class ValidationError extends CustomError {
 
     private List<FieldMessage> errors = new ArrayList<>();

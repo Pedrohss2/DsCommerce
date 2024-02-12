@@ -2,8 +2,8 @@ package com.ph.dscommerce.controller.Exceptions;
 
 import com.ph.dscommerce.dto.CustomError;
 import com.ph.dscommerce.dto.ValidationError;
-import com.ph.dscommerce.services.exceptions.DatabaseException;
-import com.ph.dscommerce.services.exceptions.ResourceNotFoundException;
+import com.ph.dscommerce.services.Exceptions.DatabaseException;
+import com.ph.dscommerce.services.Exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

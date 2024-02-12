@@ -1,34 +1,29 @@
 package com.ph.dscommerce.dto;
 
 import com.ph.dscommerce.entities.Product;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductDTO {
-
     private Long id;
 
-    @Size(min = 3, max = 80, message = "Nome precisa ter de 3 a 80 caracteres..")
-    @NotBlank(message = "Campo requerido.")
+    @Size(min = 3, max = 80, message = "Name field must have between 3 and 80 characters")
+    @NotBlank(message = "Name field cannot be empty/null")
     private String name;
-
-    @Size(min = 10, message = "Descrição precisa ter no minimo 10 caracteres..")
-    @NotBlank(message = "Campo requerido.")
+    @Size(min = 10, message = "Description needs at least 10 characters")
+    @NotBlank(message = "Field 'description' cannot be null")
     private String description;
-    @Positive(message = "Preco precisa ter um valor positivo")
+    @Positive(message = "price' field cannot be negative")
     private Double price;
     private String imgUrl;
 
-    public ProductDTO(){
-
-    }
-
-    public ProductDTO(Long id, String name, String description, Double price, String imgUrl) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.imgUrl = imgUrl;
-    }
 
     public ProductDTO(Product product) {
         id = product.getId();
@@ -38,23 +33,4 @@ public class ProductDTO {
         imgUrl = product.getImgUrl();
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public String getImgUrl() {
-        return imgUrl;
-    }
 }

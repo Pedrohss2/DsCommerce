@@ -14,7 +14,5 @@ public class DscommerceApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		System.out.println("App running on http://localhost:8080/");
-		System.out.println("Hello World my friend..");
 	}
-
 }

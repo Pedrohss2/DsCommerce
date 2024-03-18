@@ -27,16 +27,11 @@ public class ProductController {
 
 
     @GetMapping
-    public ResponseEntity<Page<ProductDTO>> findAll(Pageable pageable) {
-        Page<ProductDTO> produtctDTOS = service.findAll(pageable);
+    public ResponseEntity<Page<ProductDTO>> findAll(@RequestParam(name = "name", defaultValue = "") String name, Pageable pageable) {
+        Page<ProductDTO> produtctDTOS = service.findAll(name, pageable);
         return ResponseEntity.ok().body(produtctDTOS);
     }
 
-    @GetMapping("/names/{name}")
-    public ResponseEntity<ProductDTO> findByName(@PathVariable String name) {
-        ProductDTO productDTO = service.findByName(name);
-        return ResponseEntity.ok().body(productDTO);
-    }
 
 
     @PostMapping

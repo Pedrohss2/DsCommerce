@@ -1,4 +1,7 @@
-package com.ph.dscommerce.dto;
+package com.ph.dscommerce.dto.errors;
+
+import com.ph.dscommerce.dto.errors.CustomError;
+import com.ph.dscommerce.dto.errors.FieldMessage;
 
 import java.time.Instant;
 import java.util.ArrayList;

@@ -1,8 +1,8 @@
 package com.ph.dscommerce.controller;
 
-import com.ph.dscommerce.dto.AuthenticationDTO;
-import com.ph.dscommerce.dto.LoginDTO;
-import com.ph.dscommerce.dto.RegisterDTO;
+import com.ph.dscommerce.dto.user.AuthenticationDTO;
+import com.ph.dscommerce.dto.user.LoginDTO;
+import com.ph.dscommerce.dto.user.RegisterDTO;
 import com.ph.dscommerce.entities.User;
 import com.ph.dscommerce.repositories.UserRepository;
 import com.ph.dscommerce.services.TokenService;
@@ -11,10 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -52,4 +49,6 @@ public class AuthenticationController {
 
         return ResponseEntity.ok().build();
     }
+
+
 }

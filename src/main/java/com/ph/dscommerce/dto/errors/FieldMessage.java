@@ -1,4 +1,4 @@
-package com.ph.dscommerce.dto;
+package com.ph.dscommerce.dto.errors;
 
 import lombok.*;
 

@@ -1,4 +1,4 @@
-package com.ph.dscommerce.dto;
+package com.ph.dscommerce.dto.user;
 
 import com.ph.dscommerce.entities.enums.UserRole;
 import lombok.AllArgsConstructor;

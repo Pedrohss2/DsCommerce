@@ -1,7 +1,9 @@
 package com.ph.dscommerce.services;
 
+import com.ph.dscommerce.dto.CategoryDTO;
 import com.ph.dscommerce.dto.ProductDTO;
 import com.ph.dscommerce.dto.ProductMinDTO;
+import com.ph.dscommerce.entities.Category;
 import com.ph.dscommerce.entities.Product;
 import com.ph.dscommerce.repositories.ProductRepository;
 import com.ph.dscommerce.services.Exceptions.DatabaseException;
@@ -73,4 +75,20 @@ public class ProductService {
             throw new DatabaseException("The deletion cannot be completed because a referential integrity failure has occurred");
         }
     }
+
+    private void copyDtoToEntity(ProductDTO dto, Product product) {
+        product.setName(dto.getName());
+        product.setDescription(dto.getDescription());
+        product.setPrice(dto.getPrice());
+        product.setImgUrl(dto.getImgUrl());
+
+        product.getCategories().clear();
+
+        for(CategoryDTO categoryDTO :  dto.getCategories()) {
+            Category category = new Category();
+            category.setId(categoryDTO.getId());
+            product.getCategories().add(category);
+        }
+    }
+
 }

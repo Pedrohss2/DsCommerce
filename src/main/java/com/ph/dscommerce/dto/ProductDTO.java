@@ -1,12 +1,17 @@
 package com.ph.dscommerce.dto;
 
+import com.ph.dscommerce.entities.Category;
 import com.ph.dscommerce.entities.Product;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @AllArgsConstructor
@@ -26,6 +31,9 @@ public class ProductDTO {
     private Double price;
     private String imgUrl;
 
+    @NotEmpty(message = "'categories' field cannot be null")
+    private List<CategoryDTO> categories = new ArrayList<>();
+
 
     public ProductDTO(Product product) {
         id = product.getId();
@@ -33,6 +41,9 @@ public class ProductDTO {
         description = product.getDescription();
         price = product.getPrice();
         imgUrl = product.getImgUrl();
+        for(Category cat : product.getCategories()) {
+            categories.add(new CategoryDTO(cat));
+        }
     }
 
 }

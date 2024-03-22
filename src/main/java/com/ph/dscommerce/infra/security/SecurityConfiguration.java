@@ -23,7 +23,6 @@ public class SecurityConfiguration {
     @Autowired
     private SecurityFilter securityFilter;
 
-
     @Bean
     @Profile("test")
     @Order(1)

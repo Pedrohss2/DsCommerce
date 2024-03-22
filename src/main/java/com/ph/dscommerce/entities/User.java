@@ -30,7 +30,6 @@ public class User implements UserDetails {
     private String phone;
     private LocalDate birthDate;
     private String password;
-
     private UserRole role;
     @OneToMany(mappedBy = "user")
     private List<Order> orders = new ArrayList<>();

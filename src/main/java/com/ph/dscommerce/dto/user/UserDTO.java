@@ -1,14 +1,12 @@
 package com.ph.dscommerce.dto.user;
 
 import com.ph.dscommerce.entities.User;
+import com.ph.dscommerce.entities.enums.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @AllArgsConstructor
@@ -21,7 +19,7 @@ public class UserDTO {
     private String login;
     private String phone;
     private LocalDate birthDate;
-    private List<String> roles = new ArrayList<>();
+    private UserRole roles;
 
     public UserDTO(User user) {
         id = user.getId();
@@ -29,10 +27,7 @@ public class UserDTO {
         login = user.getLogin();
         phone = user.getPhone();
         birthDate = user.getBirthDate();
-
-        for(GrantedAuthority role : user.getAuthorities()) {
-            roles.add(role.getAuthority());
-        }
+        roles = user.getRole();
     }
 
 

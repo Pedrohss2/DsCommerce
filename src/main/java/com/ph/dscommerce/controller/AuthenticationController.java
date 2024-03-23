@@ -8,6 +8,7 @@ import com.ph.dscommerce.entities.User;
 import com.ph.dscommerce.repositories.UserRepository;
 import com.ph.dscommerce.services.AuthorizationService;
 import com.ph.dscommerce.services.TokenService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -51,7 +52,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody RegisterDTO dto) {
+    public ResponseEntity register(@Valid @RequestBody RegisterDTO dto) {
 
         if(repository.findByLogin(dto.getLogin()) != null){
             return ResponseEntity.badRequest().build();

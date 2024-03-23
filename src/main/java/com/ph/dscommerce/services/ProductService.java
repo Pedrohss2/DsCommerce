@@ -1,11 +1,11 @@
 package com.ph.dscommerce.services;
 
-import com.ph.dscommerce.dto.CategoryDTO;
-import com.ph.dscommerce.dto.ProductDTO;
-import com.ph.dscommerce.dto.ProductMinDTO;
-import com.ph.dscommerce.entities.Category;
-import com.ph.dscommerce.entities.Product;
-import com.ph.dscommerce.repositories.ProductRepository;
+import com.ph.dscommerce.rest.dto.CategoryDTO;
+import com.ph.dscommerce.rest.dto.ProductDTO;
+import com.ph.dscommerce.rest.dto.ProductMinDTO;
+import com.ph.dscommerce.domain.entity.Category;
+import com.ph.dscommerce.domain.entity.Product;
+import com.ph.dscommerce.domain.repository.ProductRepository;
 import com.ph.dscommerce.services.Exceptions.DatabaseException;
 import com.ph.dscommerce.services.Exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;

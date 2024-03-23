@@ -1,8 +1,8 @@
 package com.ph.dscommerce.services;
 
-import com.ph.dscommerce.dto.user.UserDTO;
-import com.ph.dscommerce.entities.User;
-import com.ph.dscommerce.repositories.UserRepository;
+import com.ph.dscommerce.rest.dto.user.UserDTO;
+import com.ph.dscommerce.domain.entity.User;
+import com.ph.dscommerce.domain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,15 +1,15 @@
 package com.ph.dscommerce.services;
 
-import com.ph.dscommerce.dto.OrderDTO;
-import com.ph.dscommerce.dto.OrderItemDTO;
-import com.ph.dscommerce.entities.Order;
-import com.ph.dscommerce.entities.OrderItem;
-import com.ph.dscommerce.entities.Product;
-import com.ph.dscommerce.entities.User;
-import com.ph.dscommerce.entities.enums.OrderStatus;
-import com.ph.dscommerce.repositories.OrderItemRepository;
-import com.ph.dscommerce.repositories.OrderRepository;
-import com.ph.dscommerce.repositories.ProductRepository;
+import com.ph.dscommerce.rest.dto.OrderDTO;
+import com.ph.dscommerce.rest.dto.OrderItemDTO;
+import com.ph.dscommerce.domain.entity.Order;
+import com.ph.dscommerce.domain.entity.OrderItem;
+import com.ph.dscommerce.domain.entity.Product;
+import com.ph.dscommerce.domain.entity.User;
+import com.ph.dscommerce.domain.entity.enums.OrderStatus;
+import com.ph.dscommerce.domain.repository.OrderItemRepository;
+import com.ph.dscommerce.domain.repository.OrderRepository;
+import com.ph.dscommerce.domain.repository.ProductRepository;
 import com.ph.dscommerce.services.Exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

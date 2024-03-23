@@ -1,6 +1,6 @@
 package com.ph.dscommerce.infra.security;
 
-import com.ph.dscommerce.repositories.UserRepository;
+import com.ph.dscommerce.domain.repository.UserRepository;
 import com.ph.dscommerce.services.TokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

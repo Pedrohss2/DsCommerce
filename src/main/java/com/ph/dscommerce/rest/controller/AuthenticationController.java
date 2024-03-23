@@ -24,6 +24,7 @@ public class AuthenticationController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
+
     @Autowired
     private UserRepository repository;
 
@@ -41,9 +42,8 @@ public class AuthenticationController {
         return ResponseEntity.ok(userDTO);
     }
 
-
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody AuthenticationDTO dto) {
+    public ResponseEntity<LoginDTO> login(@RequestBody AuthenticationDTO dto) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(dto.getLogin(), dto.getPassword());
         var auth = this.authenticationManager.authenticate(usernamePassword);
         var token = tokenService.generateToken((User) auth.getPrincipal());
@@ -52,7 +52,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity register(@Valid @RequestBody RegisterDTO dto) {
+    public ResponseEntity<RegisterDTO> register(@Valid @RequestBody RegisterDTO dto) {
 
         if(repository.findByLogin(dto.getLogin()) != null){
             return ResponseEntity.badRequest().build();

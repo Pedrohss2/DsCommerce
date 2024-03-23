@@ -34,13 +34,16 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user")
     private List<Order> orders = new ArrayList<>();
 
-    public User(String login, String password, UserRole role) {
+    public User(String name, String login, String phone, LocalDate birthDate, String password, UserRole role) {
+        this.name = name;
         this.login = login;
+        this.phone = phone;
+        this.birthDate = birthDate;
         this.password = password;
         this.role = role;
     }
 
-    public User(Long id, String name, String login, String phone, LocalDate birthDate, String password) {
+    public User(Long id, String name, String login, String phone, LocalDate birthDate, String password, UserRole role) {
         this.id = id;
         this.name = name;
         this.login = login;

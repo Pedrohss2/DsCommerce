@@ -4,6 +4,7 @@ import com.ph.dscommerce.dto.user.UserMinDTO;
 import com.ph.dscommerce.entities.Order;
 import com.ph.dscommerce.entities.OrderItem;
 import com.ph.dscommerce.entities.enums.OrderStatus;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,7 @@ public class OrderDTO {
     private OrderStatus status;
     private UserMinDTO user;
     private PaymentDTO payment;
+    @NotEmpty(message = "field 'item' cannot be empty")
     private List<OrderItemDTO> items = new ArrayList<>();
 
 

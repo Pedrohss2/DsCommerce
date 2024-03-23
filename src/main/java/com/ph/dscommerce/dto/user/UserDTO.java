@@ -1,29 +1,38 @@
 package com.ph.dscommerce.dto.user;
 
 import com.ph.dscommerce.entities.User;
-import com.ph.dscommerce.entities.enums.UserRole;
-import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 public class UserDTO {
 
     private Long id;
     private String name;
-    @Email(message = "'login' field need be a email!")
     private String login;
-    private String password;
-    private UserRole role;
+    private String phone;
+    private LocalDate birthDate;
+    private List<String> roles = new ArrayList<>();
 
     public UserDTO(User user) {
         id = user.getId();
         name = user.getName();
         login = user.getLogin();
-        password = user.getPassword();
-        role = user.getRole();
+        phone = user.getPhone();
+        birthDate = user.getBirthDate();
+
+        for(GrantedAuthority role : user.getAuthorities()) {
+            roles.add(role.getAuthority());
+        }
     }
 
 

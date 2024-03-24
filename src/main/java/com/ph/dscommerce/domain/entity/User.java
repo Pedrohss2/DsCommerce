@@ -53,6 +53,9 @@ public class User implements UserDetails {
     }
 
 
+    public boolean hasRole(String roleName) {
+        return role.getRole() == roleName ? true : false;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

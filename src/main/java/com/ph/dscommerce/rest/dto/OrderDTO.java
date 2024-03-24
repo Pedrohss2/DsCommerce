@@ -26,7 +26,6 @@ public class OrderDTO {
     @NotEmpty(message = "field 'item' cannot be empty")
     private List<OrderItemDTO> items = new ArrayList<>();
 
-
     public OrderDTO(Order order) {
         id = order.getId();
         moment = order.getMoment();
@@ -45,6 +44,4 @@ public class OrderDTO {
         }
         return sum;
     }
-
-
 }

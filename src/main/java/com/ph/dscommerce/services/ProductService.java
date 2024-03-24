@@ -1,15 +1,14 @@
 package com.ph.dscommerce.services;
 
-import com.ph.dscommerce.rest.dto.CategoryDTO;
-import com.ph.dscommerce.rest.dto.ProductDTO;
-import com.ph.dscommerce.rest.dto.ProductMinDTO;
 import com.ph.dscommerce.domain.entity.Category;
 import com.ph.dscommerce.domain.entity.Product;
 import com.ph.dscommerce.domain.repository.ProductRepository;
+import com.ph.dscommerce.rest.dto.CategoryDTO;
+import com.ph.dscommerce.rest.dto.ProductDTO;
+import com.ph.dscommerce.rest.dto.ProductMinDTO;
 import com.ph.dscommerce.services.Exceptions.DatabaseException;
 import com.ph.dscommerce.services.Exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -42,7 +41,7 @@ public class ProductService {
     @Transactional
     public ProductDTO insert(ProductDTO dto) {
         Product product = new Product();
-        BeanUtils.copyProperties(dto, product);
+        copyDtoToEntity(dto, product);
         product = repository.save(product);
         return new ProductDTO(product);
     }

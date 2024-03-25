@@ -33,7 +33,6 @@ public class OrderController {
                 .path("/{id}")
                 .buildAndExpand(dto.getId())
                 .toUri();
-
         return ResponseEntity.created(uri).body(dto);
     }
 

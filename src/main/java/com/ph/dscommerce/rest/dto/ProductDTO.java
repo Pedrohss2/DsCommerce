@@ -27,8 +27,10 @@ public class ProductDTO {
     @NotBlank(message = "Field 'description' cannot be null")
     private String description;
 
+    @NotEmpty(message = "'price' field cannot be null")
     @Positive(message = "price' field cannot be negative")
     private Double price;
+    @NotEmpty(message = "'imgUrl' field cannot be null")
     private String imgUrl;
 
     @NotEmpty(message = "'categories' field cannot be null")

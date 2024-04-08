@@ -1,14 +1,13 @@
 package com.ph.dscommerce.services;
 
-import com.ph.dscommerce.domain.entity.Category;
 import com.ph.dscommerce.domain.entity.Product;
 import com.ph.dscommerce.domain.repository.ProductRepository;
-import com.ph.dscommerce.rest.dto.CategoryDTO;
 import com.ph.dscommerce.rest.dto.ProductDTO;
 import com.ph.dscommerce.rest.dto.ProductMinDTO;
 import com.ph.dscommerce.services.Exceptions.DatabaseException;
 import com.ph.dscommerce.services.Exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -23,6 +22,9 @@ public class ProductService {
 
     @Autowired
     private ProductRepository repository;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Transactional(readOnly = true)
     public ProductDTO findById(Long id) {
@@ -40,23 +42,21 @@ public class ProductService {
 
     @Transactional
     public ProductDTO insert(ProductDTO dto) {
-        Product product = new Product();
-        copyDtoToEntity(dto, product);
+        Product product = modelMapper.map(dto, Product.class);
+
         product = repository.save(product);
-        return new ProductDTO(product);
+
+        return modelMapper.map(product, ProductDTO.class);
     }
 
     @Transactional
     public ProductDTO update(Long id, ProductDTO dto) {
         try {
-            Product product = repository.getReferenceById(id);
-            product.setName(dto.getName());
-            product.setDescription(dto.getDescription());
-            product.setPrice(dto.getPrice());
-            product.setImgUrl(dto.getImgUrl());
+            Product product = modelMapper.map(dto, Product.class);
 
             product = repository.save(product);
-            return new ProductDTO(product);
+
+            return modelMapper.map(product, ProductDTO.class);
         }
         catch (EntityNotFoundException e) {
             throw  new ResourceNotFoundException("Resource not found.");
@@ -75,7 +75,7 @@ public class ProductService {
         }
     }
 
-    private void copyDtoToEntity(ProductDTO dto, Product product) {
+    /* private void copyDtoToEntity(ProductDTO dto, Product product) {
         product.setName(dto.getName());
         product.setDescription(dto.getDescription());
         product.setPrice(dto.getPrice());
@@ -88,6 +88,6 @@ public class ProductService {
             category.setId(categoryDTO.getId());
             product.getCategories().add(category);
         }
-    }
+    } */
 
 }

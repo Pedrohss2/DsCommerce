@@ -13,7 +13,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 
@@ -49,7 +48,6 @@ public class ProductService {
         return modelMapper.map(product, ProductDTO.class);
     }
 
-    @Transactional
     public ProductDTO update(Long id, ProductDTO dto) {
         try {
             Product product = modelMapper.map(dto, Product.class);
@@ -62,8 +60,7 @@ public class ProductService {
             throw  new ResourceNotFoundException("Resource not found.");
         }
     }
-
-    @Transactional(propagation = Propagation.SUPPORTS)
+    
     public void deleteById(Long id) {
         repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not found."));
 

@@ -3,6 +3,7 @@ package com.ph.dscommerce.rest.controller;
 import com.ph.dscommerce.rest.dto.ProductDTO;
 import com.ph.dscommerce.rest.dto.ProductMinDTO;
 import com.ph.dscommerce.services.ProductService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,6 +23,7 @@ public class ProductController {
     private ProductService service;
 
     @GetMapping("/{id}")
+    @Operation(summary = "Find product by id")
     public ResponseEntity<ProductDTO> findById(@PathVariable Long id) {
         ProductDTO productDTO = service.findById(id);
         return ResponseEntity.ok(productDTO);
@@ -29,6 +31,7 @@ public class ProductController {
 
 
     @GetMapping
+    @Operation(summary = "Find all product pageable")
     public ResponseEntity<Page<ProductMinDTO>> findAll(@RequestParam(name = "name", defaultValue = "") String name, Pageable pageable) {
         Page<ProductMinDTO> produtctDTOS = service.findAll(name, pageable);
         return ResponseEntity.ok().body(produtctDTOS);
@@ -36,6 +39,7 @@ public class ProductController {
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping
+    @Operation(summary = "Insert a product")
     public ResponseEntity<ProductDTO> insert(@Valid @RequestBody ProductDTO dto) {
         dto = service.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -48,6 +52,7 @@ public class ProductController {
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PutMapping(value = "/{id}")
+    @Operation(summary = "Update a product")
     public ResponseEntity<ProductDTO> update(@PathVariable Long id, @Valid @RequestBody ProductDTO dto) {
         dto = service.update(id, dto);
         return ResponseEntity.ok(dto);
@@ -55,6 +60,7 @@ public class ProductController {
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @DeleteMapping(value = "/{id}")
+    @Operation(summary = "Delete product by Id")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         service.deleteById(id);
         return ResponseEntity.noContent().build();

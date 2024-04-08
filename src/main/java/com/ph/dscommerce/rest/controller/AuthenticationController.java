@@ -8,6 +8,7 @@ import com.ph.dscommerce.domain.entity.User;
 import com.ph.dscommerce.domain.repository.UserRepository;
 import com.ph.dscommerce.services.AuthorizationService;
 import com.ph.dscommerce.services.TokenService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -37,12 +38,14 @@ public class AuthenticationController {
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @GetMapping("/users/me")
+    @Operation(summary = "Get user Authentication")
     public ResponseEntity<UserDTO> getMe() {
         UserDTO userDTO = authorizationService.getMe();
         return ResponseEntity.ok(userDTO);
     }
 
     @PostMapping("/login")
+    @Operation(summary = "Login")
     public ResponseEntity<LoginDTO> login(@RequestBody AuthenticationDTO dto) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(dto.getLogin(), dto.getPassword());
         var auth = this.authenticationManager.authenticate(usernamePassword);

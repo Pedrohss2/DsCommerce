@@ -2,6 +2,7 @@ package com.ph.dscommerce.rest.controller;
 
 import com.ph.dscommerce.rest.dto.CategoryDTO;
 import com.ph.dscommerce.services.CategoryService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ public class CategoryController {
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping
+    @Operation(summary = "Insert category")
     public ResponseEntity<CategoryDTO> insert(@Valid @RequestBody CategoryDTO dto) {
         dto = categoryService.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -31,6 +33,7 @@ public class CategoryController {
     }
 
     @GetMapping
+    @Operation(summary = "List category")
     public ResponseEntity<List<CategoryDTO>> findAll() {
         List<CategoryDTO> categories = categoryService.findAll();
         return ResponseEntity.ok(categories);
